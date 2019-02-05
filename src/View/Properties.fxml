@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="501.0" prefWidth="795.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.PropertiesController">
+    <children>
+        <BorderPane fx:id="bp" prefHeight="501.0" prefWidth="794.0">
+            <top>
+                <Label prefHeight="79.0" prefWidth="227.0" text="Properties" BorderPane.alignment="CENTER">
+                    <font>
+                        <Font name="Maiandra GD" size="50.0" />
+                    </font>
+                    <textFill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                            <stops>
+                                <Stop color="#ff7c2b" />
+                                <Stop color="#ff7b2a" offset="1.0" />
+                            </stops>
+                        </RadialGradient>
+                    </textFill>
+                </Label>
+            </top>
+            <center>
+                <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <Label fx:id="lbl_Properties" alignment="TOP_LEFT" prefHeight="120.0" prefWidth="400.0" text="Label" textFill="#ff7b2a" wrapText="true">
+                            <font>
+                                <Font name="Maiandra GD" size="24.0" />
+                            </font>
+                        </Label>
+                        <ImageView fx:id="img_Properties" fitHeight="200.0" fitWidth="200.0" preserveRatio="true" />
+                    </children>
+                </VBox>
+            </center>
+        </BorderPane>
+    </children>
+</AnchorPane>

@@ -1,0 +1,23 @@
+.root{
+     /*-fx-background-color: linear-gradient(#383838, #838383);*/
+     -fx-background-image: url("../../../../Resources/back4.jpg");
+     -fx-background-position: left top, center;
+     -fx-background-repeat: no-repeat;
+     -fx-background-size: cover, auto;
+     -fx-font-size: 10pt;
+ }
+
+ .label{
+
+  }
+
+ .button{
+-fx-background-color: linear-gradient(#dc9556, #ab4642);
+-fx-background-radius: 10;
+ }
+
+ .button:hover{
+   -fx-background-color:white;
+   -fx-text-fill:black;
+   -fx-font-weight:bold;
+  }

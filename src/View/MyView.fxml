@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import View.MazeDisplayer?>
+<?import View.PlayerDisplay?>
+<?import View.SolutionDisplayer?>
+<?import View.WinDisplay?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="lyt_mainPane" onKeyPressed="#movePlayer" xmlns="http://javafx.com/javafx/8.0.121"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MyViewController">
+    <top>
+        <VBox BorderPane.alignment="CENTER">
+            <children>
+                <MenuBar>
+                    <menus>
+                        <Menu mnemonicParsing="false" text="File">
+                            <items>
+                                <MenuItem fx:id="menu_inside_new" mnemonicParsing="false" onAction="#SetStageNewEvent"
+                                          text="New"/>
+                                <MenuItem mnemonicParsing="false" onAction="#saveGame" text="Save"/>
+                                <MenuItem mnemonicParsing="false" onAction="#loadGame" text="Load"/>
+                                <MenuItem fx:id="menu_inside_exit" mnemonicParsing="false" onAction="#setOnCloseRequest"
+                                          text="Exit"/>
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Options">
+                            <items>
+                                <MenuItem fx:id="menu_inside_properties" mnemonicParsing="false"
+                                          onAction="#SetStagePropertiesEvent" text="Properties"/>
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Help">
+                            <items>
+                                <MenuItem fx:id="menu_inside_about" mnemonicParsing="false"
+                                          onAction="#SetStageAboutEvent" text="About"/>
+                                <MenuItem fx:id="menu_inside_help" mnemonicParsing="false" onAction="#SetStageHelpEvent"
+                                          text="Help"/>
+                            </items>
+                        </Menu>
+                    </menus>
+                </MenuBar>
+            </children>
+        </VBox>
+    </top>
+    <left>
+        <VBox prefHeight="356.0" prefWidth="206.0" spacing="5.0" BorderPane.alignment="CENTER">
+            <children>
+                <GridPane prefHeight="252.0" prefWidth="196.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="135.0" minWidth="10.0" prefWidth="135.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="93.0" minWidth="10.0" prefWidth="61.0"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints maxHeight="37.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES"/>
+                        <RowConstraints maxHeight="44.0" minHeight="10.0" prefHeight="38.0" vgrow="SOMETIMES"/>
+                        <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES"/>
+                        <RowConstraints maxHeight="47.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES"/>
+                        <RowConstraints maxHeight="47.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES"/>
+                        <RowConstraints maxHeight="47.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES"/>
+                        <RowConstraints maxHeight="52.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints maxHeight="48.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                    </rowConstraints>
+                    <VBox.margin>
+                        <Insets/>
+                    </VBox.margin>
+                    <children>
+                        <Button fx:id="btn_generateButton" defaultButton="true" mnemonicParsing="false"
+                                onAction="#SetStageNewEvent" text="Generate Maze" GridPane.rowIndex="2"/>
+                        <Button fx:id="btn_solveButton" defaultButton="true" disable="true" mnemonicParsing="false"
+                                onAction="#solveMaze" text="Solve Maze" GridPane.rowIndex="3"/>
+                        <Label text="Rows" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                        <Label text="Columns" GridPane.columnIndex="1"/>
+                        <TextField fx:id="txt_rowsFromUser" text="10" GridPane.rowIndex="1"/>
+                        <TextField fx:id="txt_colsFromUser" text="10"/>
+                        <Label text="Current Position:" textAlignment="CENTER" GridPane.rowIndex="5">
+                            <font>
+                                <Font name="System Bold" size="12.0"/>
+                            </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="20.0" text="Column:" GridPane.rowIndex="6"/>
+                        <Label layoutX="10.0" layoutY="20.0" text="Row:" GridPane.rowIndex="7"/>
+                        <Label fx:id="lbl_playerRow" layoutX="10.0" layoutY="236.0" GridPane.columnIndex="1"
+                               GridPane.rowIndex="6"/>
+                        <Label fx:id="lbl_playerCol" disable="true" layoutX="10.0" layoutY="20.0"
+                               GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+                        <Button fx:id="btn_restart" onAction="#restartMaze" disable="true" mnemonicParsing="false" text="Restart" GridPane.rowIndex="4"/>
+
+                    </children>
+                </GridPane>
+            </children>
+            <padding>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+            </padding>
+        </VBox>
+    </left>
+    <center>
+        <Pane fx:id="pane" onScroll="#addMouseScrolling" BorderPane.alignment="CENTER">
+            <children>
+                <Rectangle arcHeight="5.0" arcWidth="5.0" height="${pane.height}" stroke="BLACK" strokeType="INSIDE"
+                           width="${pane.width}">
+                    <fill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                            <stops>
+                                <Stop color="#07559e"/>
+                                <Stop color="#d3dce421" offset="1.0"/>
+                            </stops>
+                        </LinearGradient>
+                    </fill>
+                </Rectangle>
+                <MazeDisplayer fx:id="mazeDisplay" height="${pane.height}" width="${pane.width}"/>
+                <SolutionDisplayer fx:id="solutionDisplay" height="${pane.height}" width="${pane.width}"/>
+                <PlayerDisplay fx:id="playerDisplay" height="${pane.height}" width="${pane.width}"/>
+                <WinDisplay fx:id="winDisplay" height="${pane.height}" width="${pane.width}"/>
+            </children>
+            <padding>
+                <Insets bottom="100.0" left="100.0" right="100.0" top="100.0"/>
+            </padding>
+        </Pane>
+    </center>
+    <bottom>
+        <HBox prefHeight="19.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label text="Status: "/>
+                <Button fx:id="btn_music" mnemonicParsing="false" onAction="#SetPlayPauseEvent" text="Play"/>
+            </children>
+        </HBox>
+    </bottom>
+    <right>
+    </right>
+    <padding>
+        <Insets right="5.0"/>
+    </padding>
+</BorderPane>
